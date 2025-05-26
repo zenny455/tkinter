@@ -1,0 +1,41 @@
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
+
+def add_event():
+    t=task.get()
+    p=priority.get()
+    if t and p!="Select Preference":
+        if p=="high":
+            list.insert(tk.END, t+" ("+p+") \u26A0")
+        else:    
+            list.insert(tk.END, t+" ("+p+")")
+    else:
+         messagebox.showwarning(" ","Complete All Fields")     
+
+
+root = tk.Tk()
+root.title("To-Do-List")
+root.geometry('300x450')
+root.configure(bg='lightblue')
+
+entry=tk.Frame(root)
+entry.pack(pady=10)
+
+task=tk.Entry(entry, width=30)
+task.pack(side=tk.LEFT,padx=2)
+
+event=tk.Button(entry, text="Add Event", command=add_event)
+event.pack(side=tk.LEFT)
+
+priority=ttk.Combobox(root, value=["low","medium","high"], state="readonly")
+priority.pack(pady=5)
+priority.set("Select Preference")
+
+box=tk.Frame(root)
+box.pack(pady=5)
+
+list=tk.Listbox(box, width=40, height=20)
+list.pack(side=tk.LEFT)
+
+root.mainloop()
